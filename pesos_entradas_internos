@@ -1,0 +1,44 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_SIGNED.ALL;
+
+entity pesos_entradas_internos is
+    Port ( entrada1 : in   STD_LOGIC_VECTOR  (3 downto 0); -- x1 (alavancas)
+           entrada2 : in   STD_LOGIC_VECTOR  (3 downto 0); -- x2 (alavancas)
+           booleano : out STD_LOGIC_VECTOR (6 downto 0); -- y (0 ou 1,diplay)
+           anodo    : out STD_LOGIC_VECTOR (3 downto 0); -- acender display
+           saida 	  : out  STD_LOGIC_VECTOR  (7 downto 0)); -- u (leds FPGA)
+			  
+end pesos_entradas_internos;
+
+architecture Behavioral of pesos_entradas_internos is
+-- Sinais
+	Shared Variable u:  STD_LOGIC_VECTOR (7 downto 0); -- saida (potencial de ativ)
+	SIGNAL x1: STD_LOGIC_VECTOR (3 downto 0) := "0000";
+	SIGNAL x2: STD_LOGIC_VECTOR (3 downto 0) := "0000";
+	SIGNAL y:  STD_LOGIC_VECTOR (6 downto 0) := "0000000"; --display 
+	
+	begin
+-- Entradas sendo passadas para respectivos sinais
+		x1 <= entrada1;
+		x2 <= entrada2;
+
+	process (entrada1, entrada2)
+		Variable w1: STD_LOGIC_VECTOR (3 downto 0) := "1111" -- -1
+		Variable w2: STD_LOGIC_VECTOR (3 downto 0) := "0001"; -- 1
+		
+	begin
+		u := (x1*w1) + (x2*w2);
+
+		if u >= 0 then
+			y <= "1001111"; -- 1 no display
+		else
+			y <= "0000001"; -- 0 no display
+		end if;
+	end process;
+
+	saida <= u; -- leds FPGA
+	booleano <= y; -- display
+	anodo <= "0111"; --faz funcionar apenas um conj de filamentos especifico dos 4 da placa
+end Behavioral;
