@@ -40,5 +40,5 @@ architecture Behavioral of pesos_entradas_internos is
 
 	saida <= u; -- leds FPGA
 	booleano <= y; -- display
-	anodo <= "0111"; --faz funcionar apenas um conj de filamentos especifico dos 4 da placa
+	anodo <= "0111"; --faz funcionar apenas o primeiro conjunto de filamentos dos 4 da placa (ativos em "0")
 end Behavioral;
