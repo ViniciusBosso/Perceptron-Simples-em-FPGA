@@ -28,14 +28,14 @@ architecture Behavioral of pesos_entradas_internos is
 		Variable w1: STD_LOGIC_VECTOR (3 downto 0) := "1111" -- -1
 		Variable w2: STD_LOGIC_VECTOR (3 downto 0) := "0001"; -- 1
 		
-	begin
-		u := (x1*w1) + (x2*w2);
+		begin
+			u := (x1*w1) + (x2*w2);
 
-		if u >= 0 then
-			y <= "1001111"; -- 1 no display
-		else
-			y <= "0000001"; -- 0 no display
-		end if;
+			if u >= 0 then
+				y <= "1001111"; -- 1 no display
+			else
+				y <= "0000001"; -- 0 no display
+			end if;
 	end process;
 
 	saida <= u; -- leds FPGA
