@@ -17,6 +17,7 @@ architecture Behavioral of pesos_entradas_internos is
 	Shared Variable u:  STD_LOGIC_VECTOR (7 downto 0); -- saida (potencial de ativ)
 	SIGNAL x1: STD_LOGIC_VECTOR (3 downto 0) := "0000";
 	SIGNAL x2: STD_LOGIC_VECTOR (3 downto 0) := "0000";
+	SIGNAL anodo_sinal: STD_LOGIC_VECTOR (3 downto 0) := "0111";
 	SIGNAL y:  STD_LOGIC_VECTOR (6 downto 0) := "0000000"; --display 
 	
 	begin
@@ -40,5 +41,5 @@ architecture Behavioral of pesos_entradas_internos is
 
 	saida <= u; -- leds FPGA
 	booleano <= y; -- display
-	anodo <= "0111"; --faz funcionar apenas o primeiro conjunto de filamentos dos 4 da placa (ativos em "0")
+	anodo <= anodo_sinal; --faz funcionar apenas o primeiro conjunto de filamentos dos 4 da placa (ativos em "0")
 end Behavioral;
