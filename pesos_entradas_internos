@@ -8,8 +8,7 @@ entity pesos_entradas_internos is
            entrada2 : in   STD_LOGIC_VECTOR  (3 downto 0); -- x2 (alavancas)
            booleano : out STD_LOGIC_VECTOR (6 downto 0); -- y (0 ou 1,diplay)
            anodo    : out STD_LOGIC_VECTOR (3 downto 0); -- acender display
-           saida    : out  STD_LOGIC_VECTOR  (7 downto 0)); -- u (leds FPGA)
-			  
+           saida    : out  STD_LOGIC_VECTOR  (7 downto 0)); -- u (leds FPGA)	  
 end pesos_entradas_internos;
 
 architecture Behavioral of pesos_entradas_internos is
