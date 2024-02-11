@@ -6,18 +6,18 @@ use IEEE.STD_LOGIC_SIGNED.ALL;
 entity pesos_entradas_internos is
     Port ( entrada1 : in   STD_LOGIC_VECTOR  (3 downto 0); --x1 (alavancas)
            entrada2 : in   STD_LOGIC_VECTOR  (3 downto 0); -- x2 (alavancas)
-           booleano : out STD_LOGIC_VECTOR (6 downto 0); -- y (0 ou 1,diplay)
-           anodo    : out STD_LOGIC_VECTOR (3 downto 0); -- acender display
-           saida    : out  STD_LOGIC_VECTOR  (7 downto 0)); -- u (leds FPGA)	  
+           booleano : out STD_LOGIC_VECTOR (6 downto 0); -- saida do potencial de ativação (0 ou 1,diplay)
+           anodo    : out STD_LOGIC_VECTOR (3 downto 0); -- acender conjunto de filamentos do display
+           saida    : out  STD_LOGIC_VECTOR  (7 downto 0)); -- potencial de ativação "u" (leds FPGA)	  
 end pesos_entradas_internos;
 
 architecture Behavioral of pesos_entradas_internos is
 -- Sinais
 	Shared Variable u:  STD_LOGIC_VECTOR (7 downto 0); -- saida (potencial de ativ)
-	SIGNAL x1: STD_LOGIC_VECTOR (3 downto 0) := "0000";
-	SIGNAL x2: STD_LOGIC_VECTOR (3 downto 0) := "0000";
-	SIGNAL anodo_sinal: STD_LOGIC_VECTOR (3 downto 0) := "0111";
-	SIGNAL y:  STD_LOGIC_VECTOR (6 downto 0) := "0000000"; --display 
+	SIGNAL x1: STD_LOGIC_VECTOR (3 downto 0) := "0000"; -- sinal da porta entrada1
+	SIGNAL x2: STD_LOGIC_VECTOR (3 downto 0) := "0000"; -- sinal da porta entrada2
+	SIGNAL anodo_sinal: STD_LOGIC_VECTOR (3 downto 0) := "0111"; -- sinal da porta anodo
+	SIGNAL y:  STD_LOGIC_VECTOR (6 downto 0) := "0000000"; -- sinal da porta booleano 
 	
 	begin
 -- Entradas sendo passadas para respectivos sinais
