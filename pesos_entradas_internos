@@ -3,6 +3,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_SIGNED.ALL;
 
+-- STD_LOGIC_VECTOR, significa que o elemento recebe uma valor binário em matriz com bits de (n downto 0) sendo n um número inteiro
+
 entity pesos_entradas_internos is
     Port ( entrada1 : in   STD_LOGIC_VECTOR  (3 downto 0); --x1 (alavancas)
            entrada2 : in   STD_LOGIC_VECTOR  (3 downto 0); -- x2 (alavancas)
@@ -25,20 +27,23 @@ architecture Behavioral of pesos_entradas_internos is
 		x2 <= entrada2;
 
 	process (entrada1, entrada2)
-		Variable w1: STD_LOGIC_VECTOR (3 downto 0) := "1111" -- -1
-		Variable w2: STD_LOGIC_VECTOR (3 downto 0) := "0001"; -- 1
+-- Pesos que podem ser mudados internamente 
+		Variable w1: STD_LOGIC_VECTOR (3 downto 0) := "1111" -- -1 em decimal (pois está com a biblioteca SIGNED "Complemento de 2")
+		Variable w2: STD_LOGIC_VECTOR (3 downto 0) := "0001"; -- 1 em decimal
 		
 		begin
+-- Cálculo do potencial de ativação
 			u := (x1*w1) + (x2*w2);
 
+-- Condicional para determinar a saída do neurônio "y"
 			if u >= 0 then
-				y <= "1001111"; -- 1 no display
+				y <= "1001111"; -- Corresponde a 1 no display
 			else
-				y <= "0000001"; -- 0 no display
+				y <= "0000001"; -- Corresponde a 0 no display
 			end if;
 	end process;
-
+-- Sinais sendo passados para as portas de saída da entidade
 	saida <= u; -- leds FPGA
-	booleano <= y; -- display
-	anodo <= anodo_sinal; --faz funcionar apenas o primeiro conjunto de filamentos dos 4 da placa (ativos em "0")
+	booleano <= y; -- display (filamentos ativos em "0" e desativados em "1")
+	anodo <= anodo_sinal; --conjunto de filamentos (ativos em "0")
 end Behavioral;
